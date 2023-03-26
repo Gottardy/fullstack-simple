@@ -1,13 +1,21 @@
+if(process.env.NODE_ENV!== `production`){
+    require('dotenv').config();
+    console.log(process.env.NODE_ENV);
+}
+
 const express = require('express');
 const morgan = require('morgan');
 const multer = require('multer');
 const path = require('path');
 
+
 // Initializations
 const app = express();
+require('./bd');
 
 // settings
-app.set('port',3000);
+app.set('port',process.env.PORT || 3000);
+
 
 // middlewares
 app.use(morgan('dev'));
