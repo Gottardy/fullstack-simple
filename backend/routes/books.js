@@ -1,9 +1,11 @@
 const { Router } = require('express');
 const router = Router();
+const Books = require('../models/Books');
 
-router.get('/',(req, res)=>{
+router.get('/',async (req, res)=>{
+    const list_Books = await Books.find();
     res.json({
-        text:'Hola mundo'
+        list_Books
     })
 })
 
