@@ -4,8 +4,10 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
+// console.log(devMode);
 
 module.exports={
+    mode: devMode ? 'development' : 'production',
     entry:'./frontend/app.js',
     output:{
         path:path.join(__dirname,'backend/public'),
