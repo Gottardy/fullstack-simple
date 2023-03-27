@@ -10,9 +10,11 @@ router.get('/',async (req, res)=>{
 })
 
 router.post('/', async (req, res) =>{
-    // console.log('Request: \n',req.body);
-    const {tittle, author, isbn } = req.body;
-    const newBook = new Books({tittle, author, isbn});
+    console.log('Request Body: \n',req.body);
+    console.log('Request File: ',req.file);
+    const { title, author, isbn } = req.body;
+    const  imagePath = '/uploads/'+req.file.filename;
+    const newBook = new Books({title, author, isbn, imagePath});
     // console.log('Nuevo Libro: \n',newBook);
     await newBook.save();
     res.status(200).json(
