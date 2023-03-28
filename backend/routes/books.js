@@ -1,5 +1,7 @@
 const { Router } = require('express');
 const router = Router();
+const {unlink} = require('fs-extra');
+const path = require('path');
 const Books = require('../models/Books');
 
 router.get('/',async (req, res)=>{
@@ -10,8 +12,8 @@ router.get('/',async (req, res)=>{
 })
 
 router.post('/', async (req, res) =>{
-    console.log('Request Body: \n',req.body);
-    console.log('Request File: ',req.file);
+    // console.log('Request Body: \n',req.body);
+    // console.log('Request File: ',req.file);
     const { title, author, isbn } = req.body;
     const  imagePath = '/uploads/'+req.file.filename;
     const newBook = new Books({title, author, isbn, imagePath});
@@ -25,9 +27,10 @@ router.post('/', async (req, res) =>{
 })
 
 router.delete('/:id', async (req, res) =>{
-    console.log('Request Book ID: \n',req.params.id);
+    // console.log('Request Book ID: \n',req.params.id);
     const idBook = req.params.id;
-    await Books.findByIdAndDelete(idBook)
+    const book = await Books.findByIdAndDelete(idBook)
+    unlink(path.resolve('./backend/public'+book.imagePath))
     res.status(200).json(
       {
         message:`Received BookID {${idBook}} - Book Physical Delete`

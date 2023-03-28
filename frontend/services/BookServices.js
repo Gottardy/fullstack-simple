@@ -16,6 +16,7 @@ class BookService{
         });
         const data = await response.json();
         console.log(data);
+        return data;
     }
 
     async deleteBook(bookID){
@@ -26,6 +27,7 @@ class BookService{
             method:'DELETE'
         });
         const data = await response.json();
+        console.log(data);
         return data;
     }
 }
