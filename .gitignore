@@ -10,3 +10,4 @@ client_google.json
 .env
 *.pdf
 *.pswd
+backend/leer.txt
